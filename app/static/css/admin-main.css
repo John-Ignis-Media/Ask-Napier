@@ -1,0 +1,101 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.alert {
+  border-radius: 0px;
+}
+
+.post {
+  background-color: #e6e6e6;
+}
+
+.post h1 {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0px;
+  padding: 0px;
+}
+
+.post span {
+  font-size: 14px;
+}
+
+.post p {
+  margin: 0px;
+  padding: 0px;
+}
+
+.navbar-dark .navbar-brand {
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.sidenav {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(0 ,0 ,0 , 0.06);
+  overflow-x: hidden;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: black;
+}
+
+.main {
+  margin-left: 250px; /* Same as the width of the sidenav */
+  margin-top: 35px;
+  padding: 25px 50px 50px 50px;
+}
+
+.form-wrap {
+  background-color: #e6e6e6;
+}
+
+.btn-primary {
+  border-radius: 0px;
+  border-color: #c31433;
+  background-color: #c31433;
+}
+
+.btn-primary:hover {
+  background-color: #d51638;
+  border-color: #d51638;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+  background-color: #d51638;
+  border-color: #d51638;
+}
+
+.btn-outline-primary {
+  border-radius: 0px;
+  border-color: #c31433;
+  color: #c31433;
+}
+
+.btn-outline-primary:hover {
+  border-radius: 0px;
+  border-color: #c31433;
+  color: #c31433;
+  background-color: pink;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .show>.btn-outline-primary.dropdown-toggle {
+  background-color: #d51638;
+  border-color: #d51638;
+}

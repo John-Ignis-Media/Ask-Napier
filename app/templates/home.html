@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="intro-header mt-3 p-3">
+  <h1>What is Ask Napier?</h1>
+
+    <p class="mt-2">Ask Napier is a message board/forum designed to allow students of the university to post messages to their course modules where other
+    members will be able to reply.</p>
+
+    <p class="mt-2"> This platform is completely <b>anonymous</b> and there is no way to identify the poster. This way it allows students to be completely open and will
+    make it easier to ask questions. No need to worry about asking a silly question here.</p>
+
+    <p class="mt-2">To get started, simply register/sign-in to view a list of your modules message boards.</p>
+
+</div>
+
+{% if current_user.is_authenticated %}
+
+<div class="form-title mt-3 mb-3 pl-3 pt-2 pb-2">
+  <h1>Modules</h1>
+</div>
+
+{% for modulename in modules %}
+<div class="module-title mb-3 pl-3 pt-2 pb-2">
+  <h2><a href="/board?module={{modulename.modulename}}">{{modulename.modulename}}</a></h2>
+</div>
+{% endfor %}
+
+{% else %}
+
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends "admin-layout.html" %}
+{% block content %}
+
+<p class="mt-5">Are you sure you want to delete the following post?</p>
+<p>Deleted posts cannot be undone.</p>
+
+<div class="post p-3 mt-3">
+  <h1>{{ post.title }} <span class="text-muted">By User at {{ post.time }}</span>{% if session['logged'] %}<span style="float: right; color: rgba(0,0,0,0.2)">(Post ID: {{ post.id }})</span>{% endif %}</h1>
+  <hr>
+  <p>{{ post.content }}</p>
+  <a href="{{ url_for('delete_post', post_id=post_id) }}"><div class="mt-3 mr-2 btn btn-primary">Yes</div></a>
+  <a href="{{ url_for('admin_posts') }}"><div class="mt-3 btn btn-primary">No</div></a>
+</div>
+
+
+{% endblock content %}

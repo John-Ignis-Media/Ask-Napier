@@ -1,0 +1,49 @@
+{% extends "admin-layout.html" %}
+{% block content %}
+
+<h1 class="mt-2">Replies</h1>
+
+<hr>
+
+<div class="form-wrap p-3">
+<form class="" name="form" action="?form=form" method="post">
+  {{ form.hidden_tag() }}
+  <fieldset class="form-group" style="margin: 0px;">
+    <div class="form-group">
+
+      {{ form.reply_id.label(class="form-control-label") }}
+
+      {{ form.reply_id(class="form-control form-control", style="border-radius: 0px;") }}
+
+    </div>
+
+  </fieldset>
+  <div class="form-group">
+    {{ form.submit(class="btn btn-primary") }}
+  </div>
+</form>
+
+<ul class="list-group mt-3 mb-3">
+  {% for replies in replies.items %}
+  <li style="border-radius: 0px;" class="list-group-item d-flex justify-content-between align-items-center">
+    Reply ID: {{ replies.id }} - '{{ replies.content }}' <a href="/delete_confirm_replies?reply_id={{ replies.id }}"><span style="border-radius: 0px;" class="badge badge-danger badge-pill">Delete</span></a>
+  </li>
+  {% else %}
+  There are no posts to display.
+  {% endfor %}
+</ul>
+
+{% for page_num in replies.iter_pages(left_edge=1, right_edge=1, left_current=100, right_current=100) %}
+  {% if page_num %}
+    {% if replies.page == page_num %}
+    <a class="btn btn-primary mb-4" href="{{ url_for('admin_replies', filter=filter, page=page_num) }}">{{ page_num }}</a>
+    {% else %}
+    <a class="btn btn-outline-primary mb-4" href="{{ url_for('admin_replies', filter=filter, page=page_num) }}">{{ page_num }}</a>
+    {% endif %}
+  {% else %}
+  {% endif %}
+{% endfor %}
+
+</div>
+
+{% endblock content %}

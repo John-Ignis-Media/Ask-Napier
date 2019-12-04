@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <div class="form-title mt-3 pl-3 pt-2 pb-2">
+      <h1>Create New Post in {{ module_name }}</h1>
+    </div>
+
+    <div class="form-wrap p-3">
+      <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+
+          <div class="form-group">
+            {{ form.post_title.label(class="form-control-label") }}
+
+            {% if form.post_title.errors %}
+              {{ form.post_title(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.post_title.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.post_title(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            {{ form.post_content.label(class="form-control-label") }}
+
+            {% if form.post_content.errors %}
+              {{ form.post_content(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.post_content.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.post_content(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+
+        </fieldset>
+        <div class="form-group">
+          {{ form.submit(class="btn btn-primary") }}
+        </div>
+      </form>
+    </div>
+
+{% endblock content %}

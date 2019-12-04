@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- create new post for "module" (passed from URL) -->
+<!-- get posts from "module" (passed from URL) -->
+
+<div class="form-title mt-3 pl-3 pt-2 pb-2">
+<h1>View Comments</h1>
+</div>
+
+<div class="buttons mt-1">
+<ul style="list-style-type: none; margin: 0; padding: 0;">
+
+  <li style="display: inline;"><a href="/board?module={{ module }}"><div class="btn btn-primary">Go Back</div></a></li>
+
+</ul>
+</div>
+
+{% for posts in posts %}
+
+<div class="post p-3 mt-3">
+  <h1>{{ posts.title }} <span class="text-muted">By User at {{ posts.time }}</span><span style="float: right; color: rgba(0,0,0,0.2)">(Post ID: {{ posts.id }})</span></h1>
+  <hr>
+  <p>{{ posts.content }}</p>
+</div>
+
+{% endfor %}
+
+<div class="form-title mt-3 pl-3 pt-2 pb-2">
+<h1>Comments</h1>
+</div>
+
+{% for replies in replies.items %}
+
+<div class="comment p-3 mt-3">
+  <h1><span class="text-muted">User at {{ replies.time }}</span><span style="float: right; color: rgba(0,0,0,0.2)">(Reply ID: {{ replies.id }})</span></h1>
+  <hr>
+  <p>{{ replies.content }}</p>
+</div>
+
+{% else %}
+
+<h3 class="text-muted mt-4">There are no replies to this post.</h3>
+
+{% endfor %}
+
+<br>
+
+{% for page_num in replies.iter_pages(left_edge=1, right_edge=1, left_current=100, right_current=100) %}
+  {% if page_num %}
+    {% if replies.page == page_num %}
+    <a class="btn btn-primary mb-4" href="{{ url_for('post', module=module, post_id=post_id, page=page_num) }}">{{ page_num }}</a>
+    {% else %}
+    <a class="btn btn-outline-primary mb-4" href="{{ url_for('post', module=module, post_id=post_id, page=page_num) }}">{{ page_num }}</a>
+    {% endif %}
+  {% else %}
+  {% endif %}
+{% endfor %}
+
+<br>
+
+<div class="form-wrap p-3">
+  <form action="" method="post">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+
+      <div class="form-group">
+        {{ form.reply_content.label(class="form-control-label") }}
+
+        {% if form.reply_content.errors %}
+          {{ form.reply_content(class="form-control form-control-lg is-invalid") }}
+          <div class="invalid-feedback">
+            {% for error in form.reply_content.errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.reply_content(class="form-control form-control-lg") }}
+        {% endif %}
+      </div>
+
+    </fieldset>
+    <div class="form-group">
+      {{ form.submit(class="btn btn-primary") }}
+    </div>
+  </form>
+</div>
+
+
+{% endblock content %}

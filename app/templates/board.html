@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- create new post for "module" (passed from URL) -->
+<!-- get posts from "module" (passed from URL) -->
+
+<div class="form-title mt-3 pl-3 pt-2 pb-2">
+<h1>{{ module }}</h1>
+</div>
+
+<div class="buttons mt-1">
+<ul style="list-style-type: none; margin: 0; padding: 0;">
+
+  <li style="display: inline;"><a href="{{ url_for('home') }}"><div class="btn btn-primary">Go Back</div></a></li>
+  <li style="display: inline;"><a href="/create-post?module={{ module }}"><div class="btn btn-primary">New Post</div></a></li>
+
+</ul>
+</div>
+
+{% for posts in posts.items %}
+
+<div class="post p-3 mt-3">
+  <h1>{{ posts.title }} <span class="text-muted">By User at {{ posts.time }}</span>{% if session['logged'] %}<span style="float: right; color: rgba(0,0,0,0.2)">(Post ID: {{ posts.id }})</span>{% endif %}</h1>
+  <hr>
+  <p>{{ posts.content }}</p>
+  <a href="post?module={{ module }}&post_id={{ posts.id }}"><div class="mt-3 btn btn-primary">View Comments / Reply</div></a>
+</div>
+
+{% else %}
+
+<div class="post p-3 mt-3">
+  <p>There are no posts here yet. <strong>Be the first!</strong></p>
+</div>
+
+{% endfor %}
+
+<br>
+
+{% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=100, right_current=100) %}
+  {% if page_num %}
+    {% if posts.page == page_num %}
+    <a class="btn btn-primary mb-4" href="{{ url_for('board', module=module, page=page_num) }}">{{ page_num }}</a>
+    {% else %}
+    <a class="btn btn-outline-primary mb-4" href="{{ url_for('board', module=module, page=page_num) }}">{{ page_num }}</a>
+    {% endif %}
+  {% else %}
+  {% endif %}
+{% endfor %}
+
+{% endblock content %}

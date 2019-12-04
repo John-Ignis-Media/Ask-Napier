@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<center>
+<h1 style="color: red; font-weight: bold;" class="mt-5">Error 404</h1>
+<h2 class="mb-5">The page you have requested can't be found.</h2>
+<p>You will be automatically re-directed to the home page in 5 seconds... </p>
+<p>If your browser doesn't automatically re-direct you click<a href="{{ url_for('home') }}"> here.</a></p>
+</center>
+
+<script>
+  window.setTimeout(function()
+  { window.location.href = "{{ url_for('home') }}"; }, 5000);
+ </script>
+
+{% endblock content %}
